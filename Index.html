@@ -3,48 +3,406 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Kissing circles</title>
-    <script src="https://cdn.jsdelivr.net/gh/dfrohwein/dev@master/js/lib/phaser.js"></script>
-    <script src="./compactKissingCircles.js"></script>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style type="text/css">
         body {
-            margin: 30px;
-            background-color: #30301d;
+            margin: 50px;
         }
 
-        .centerx {
+        .loaderA {
             position: absolute;
-            left: 50%;
-            text-align: center;
-            margin-left: -200px;
-            width: 400px;
+            top: 0;
+            left: 0;
+            border: 12px solid #042b4c;
+            border-radius: 50%;
+            border-bottom: 12px solid #042b4c;
+            border-left: 12px solid #FFFFFF00;
+            border-top: 12px solid #FFFFFF00;
+            width: 25px;
+            height: 25px;
+            animation: spin 2s ease-in infinite;
         }
+
+        .loaderB {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 12px solid #084f79;
+            border-bottom: 12px solid #084f79;
+            border-left: 12px solid #FFFFFF00;
+            border-top: 12px solid #FFFFFF00;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        .loaderC {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 12px solid #1d6693;
+            border-bottom: 12px solid #1d6693;
+            border-left: 12px solid #FFFFFF00;
+            border-top: 12px solid #FFFFFF00;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            animation: spin 2s ease-out infinite;
+        }
+
+        .loaderBack {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            border: 12px solid #042b4c;
+            border-bottom: 12px solid #042b4c;
+            border-left: 12px solid #042b4c;
+            border-top: 12px solid #042b4c;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            animation: wiggle 2s ease-out infinite;
+        }
+
+        .loaderHide {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background-color: #042b4c;
+            width: 50px;
+            height: 20px;
+        }
+
+        .loaderAll {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 50px;
+            display: none;
+        }
+
+        .loadingContainer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #707070;
+            background-color: #353540;
+        }
+
+        .loaderAll2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -26px;
+            margin-top: -25px;
+        }
+
+        .loadingText {
+            position: absolute;
+            color: #084f79;
+            top: 62px;
+            height: 38px;
+            line-height: 38px;
+            width: 100%;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 9px;
+            animation: fc 3s linear infinite;
+        }
+
+        .loaderV1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 5px solid #084f79;
+            border-bottom: 5px solid #FFFFFF00;
+            border-left: 5px solid #944c51;
+            border-top: 5px solid #FFFFFF00;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spinStop 3s linear infinite;
+        }
+
+        .loaderV2 {
+            position: absolute;
+            top: 0;
+            left: 9px;
+            border: 5px solid #084f79;
+            border-bottom: 5px solid #FFFFFF00;
+            border-left: 5px solid #944c51;
+            border-top: 5px solid #FFFFFF00;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spinRStop 3s linear infinite;
+        }
+
+        .loaderV3 {
+            position: absolute;
+            top: 13px;
+            left: 17px;
+            border: none;
+            background-color: #944c51;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            animation: bgc 3s linear infinite;
+        }
+
+        @keyframes fc {
+
+            0% {
+                color: #999999
+            }
+
+            50% {
+                color: #EEEEEE
+            }
+
+            100% {
+                color: #999999
+            }
+
+        }
+
+        @keyframes bgc {
+
+            0% {
+                background-color: #944c51
+            }
+
+            50% {
+                background-color: #084f79
+            }
+
+            100% {
+                background-color: #944c51
+            }
+
+        }
+
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinStop {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            12.5% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(0deg);
+            }
+
+            37.5% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            62.5% {
+                transform: rotate(180deg);
+            }
+
+            75% {
+                transform: rotate(180deg);
+            }
+
+            87.5% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinRStop {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            12.5% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-180deg);
+            }
+
+            37.5% {
+                transform: rotate(-180deg);
+            }
+
+            50% {
+                transform: rotate(-180deg);
+            }
+
+            62.5% {
+                transform: rotate(-180deg);
+            }
+
+            75% {
+                transform: rotate(-360deg);
+            }
+
+            87.5% {
+                transform: rotate(-360deg);
+            }
+
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes wiggle {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            30% {
+                transform: rotate(10deg);
+            }
+
+            60% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes spinR {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-360deg);
+            }
     </style>
+
+    <script>
+
+    </script>
 </head>
 
 <body>
-    <div class="centerx">
-        <div id="phaser-container">
 
-        </div>
-        <div class="row">
-            <h3>
-                <a id="home" href="http://what-paul-says-about-peter.tumblr.com" target="_blank">Tumblr
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <h3>
-                <a id="home" href="http://www.aleatoric.de" target="_blank">Home</a>
-
-            </h3>
-        </div>
-        <div class="row">
-            <h3>
-                Created by: frohwein.daniel.muenchen@gmail.com
-            </h3>
-        </div>
-    </div>
+    <div class="loadAQ" loadAQargs='{"type":"script","url":"http://www.aleatoric.de/kissingCircles/phaser.js"}'></div>
+    <div class="loadAQ" loadAQargs='{"type":"script","url":"http://www.aleatoric.de/kissingCircles/compact.js","containerID":"phaser-container","width":"400","height":"400"}'></div>
 </body>
+
+<script>
+    var loadAQload = function () {
+
+        var loadAQ = document.getElementsByClassName("loadAQ");
+
+        var nextLoad = function (val1, args1) {
+
+            var rm = val1.getElementsByClassName("loadingContainer");
+
+            for (var i = 0; i < rm.length; i++) {
+                val1.style.width = "auto";
+                val1.style.height = "auto";
+                rm[i].parentNode.removeChild(rm[i]);
+            }
+
+            val1.className = "loaderAQReadyElement";
+
+            if (loadAQ.length > 0) {
+                loadIterate();
+            }
+
+        };
+
+        var showLoading = function () {
+            for (var i = 0, len = loadAQ.length; i < len; i++) {
+                var val = loadAQ[i];
+                val.style.width = "100px";
+                val.style.height = "100px";
+                var tooltip = "loading";
+                var args = JSON.parse(val.getAttribute("loadAQargs"));
+                if (args.url) {
+                    tooltip = args.url;
+                }
+                val.title = tooltip;
+                var loadingAnim = document.createElement("div");
+                loadingAnim.className = "loadingContainer";
+                loadingAnim.innerHTML =
+                    "<div class='loaderAll2'><div class='loaderV1'></div><div class='loaderV2'></div><div class='loaderV3'></div></div><div class='loadingText'>Loading...</div>";
+                val.appendChild(loadingAnim);
+            }
+        };
+
+        showLoading();
+
+        var loadIterate = function () {
+
+            var val = loadAQ[0];
+
+            var args = JSON.parse(val.getAttribute("loadAQargs"));
+            if (args.containerID) {
+                var apnd = document.createElement("div");
+                apnd.id = args.containerID;
+                apnd.width = args.width;
+                apnd.height = args.height;
+                val.appendChild(apnd);
+            };
+            if (!args.loadAsText) {
+                args.loadAsText = false;
+            }
+
+            var loadN = function (type, url, loadAsText, val2, args2) {
+                if (!loadAsText) {
+                    var script = document.createElement('script');
+                    script.onload = function () {
+                        nextLoad(val2, args2);
+                    };
+                    script.src = url;
+                    document.head.appendChild(script);
+                } else {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var script = document.createElement(type);
+                            script.innerHTML = this.responseText;
+                            document.head.appendChild(script);
+                            nextLoad(val2, args2);
+                        }
+                    };
+                    xhttp.open("GET",
+                        "https://cors-anywhere.herokuapp.com/" + url,
+                        true);
+                    xhttp.send();
+                }
+            };
+            loadN(args.type, args.url, args.loadAsText, val, args);
+        }
+
+        loadIterate();
+
+    }
+
+    loadAQload();
+</script>
 
 </html>
